@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balão AR</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.7.2/aframe/build/aframe-ar.js"></script>
+    <style>
+        body { margin: 0; padding: 0; }
+        #container { width: 100vw; height: 100vh; overflow: hidden; }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const sceneEl = document.createElement('a-scene');
+            sceneEl.setAttribute('embedded', '');
+            sceneEl.setAttribute('arjs', 'sourceType: webcam;');
+
+            const markerEl = document.createElement('a-marker');
+            markerEl.setAttribute('preset', 'hiro');
+
+            const balloonEl = document.createElement('a-entity');
+            balloonEl.setAttribute('geometry', 'primitive: sphere; radius: 0.25'); // 50 cm de altura
+            balloonEl.setAttribute('material', 'color: red');
+            balloonEl.setAttribute('position', '0 1 2'); // 2 metros de distância e 1 metro acima do marcador
+
+            markerEl.appendChild(balloonEl);
+            sceneEl.appendChild(markerEl);
+            document.getElementById('container').appendChild(sceneEl);
+        });
+    </script>
+</body>
+</html>

@@ -19,19 +19,15 @@
             sceneEl.setAttribute('embedded', '');
             sceneEl.setAttribute('arjs', 'sourceType: webcam;');
 
-            const markerEl = document.createElement('a-marker');
-            markerEl.setAttribute('preset', 'hiro');
-            markerEl.addEventListener('markerFound', () => {
-                console.log('Marcador detectado');
-            });
+ 
 
             const balloonEl = document.createElement('a-entity');
             balloonEl.setAttribute('geometry', 'primitive: sphere; radius: 0.25'); // 50 cm de altura
             balloonEl.setAttribute('material', 'color: red');
             balloonEl.setAttribute('position', '0 1 2'); // 2 metros de distância e 1 metro acima do marcador
 
-            markerEl.appendChild(balloonEl);
-            sceneEl.appendChild(markerEl);
+            sceneEl.appendChild(balloonEl);
+        
             document.getElementById('container').appendChild(sceneEl);
         });
     </script>

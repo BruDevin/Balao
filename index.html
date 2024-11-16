@@ -18,14 +18,16 @@
     </a-scene>
     <script> 
         // Variáveis para armazenar o estado de rotação 
-        let isDragging = false; let previousMousePosition = { x: 0, y: 0 };
-        // Função para lidar com o início do arraste 
-        document.addEventListener('mousedown', function(event) { isDragging = true; }); 
-        // Função para lidar com o fim do arraste 
-        document.addEventListener('mouseup', function(event) { isDragging = false; }); 
-        // Função para lidar com o movimento do arraste 
-        document.addEventListener('mousemove', function(event) { if (isDragging) { let deltaMove = { x: event.clientX - previousMousePosition.x, y: event.clientY - previousMousePosition.y }; let rotatableObject = document.getElementById('rotatable-object'); let rotation = rotatableObject.getAttribute('rotation'); rotation.y += deltaMove.x * 0.5; rotation.x -= deltaMove.y * 0.5; rotatableObject.setAttribute('rotation', rotation); previousMousePosition = { x: event.clientX, y: event.clientY }; } }); 
-        // Atualiza a posição do mouse 
-        document.addEventListener('mousemove', function(event) { previousMousePosition = { x: event.clientX, y: event.clientY }; }); </script>
+        let isDragging = false; let previousMousePosition = { x: 0, y: 0 }; 
+        // Função para iniciar o arraste (mouse e toque) 
+        function startDrag(event) { isDragging = true; previousMousePosition = getEventPosition(event); } 
+        // Função para terminar o arraste (mouse e toque) 
+        function endDrag() { isDragging = false; } 
+        // Função para obter a posição do evento (mouse e toque) 
+        function getEventPosition(event) { return { x: event.clientX || event.touches[0].clientX, y: event.clientY || event.touches[0].clientY }; } 
+        // Função para mover o arraste (mouse e toque) 
+        function moveDrag(event) { if (isDragging) { const currentMousePosition = getEventPosition(event); const deltaMove = { x: currentMousePosition.x - previousMousePosition.x, y: currentMousePosition.y - previousMousePosition.y }; const rotatableObject = document.getElementById('rotatable-object'); const rotation = rotatableObject.getAttribute('rotation'); rotation.y += deltaMove.x * 0.5; rotation.x -= deltaMove.y * 0.5; rotatableObject.setAttribute('rotation', rotation); previousMousePosition = currentMousePosition; } } 
+        // Adiciona ouvintes de eventos para mouse e toque 
+        document.addEventListener('mousedown', startDrag); document.addEventListener('mouseup', endDrag); document.addEventListener('mousemove', moveDrag); document.addEventListener('touchstart', startDrag); document.addEventListener('touchend', endDrag); document.addEventListener('touchmove', moveDrag); </script>
 </body>
 </html>

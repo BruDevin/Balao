@@ -16,6 +16,16 @@
             animation-mixer>
         </a-entity>
     </a-scene>
-    <script> // Variáveis para armazenar o estado de rotação let isDragging = false; let previousMousePosition = { x: 0, y: 0 }; // Função para lidar com o início do arraste document.addEventListener('mousedown', function(event) { isDragging = true; }); // Função para lidar com o fim do arraste document.addEventListener('mouseup', function(event) { isDragging = false; }); // Função para lidar com o movimento do arraste document.addEventListener('mousemove', function(event) { if (isDragging) { let deltaMove = { x: event.clientX - previousMousePosition.x, y: event.clientY - previousMousePosition.y }; let rotatableObject = document.getElementById('rotatable-object'); let rotation = rotatableObject.getAttribute('rotation'); rotation.y += deltaMove.x * 0.5; rotation.x -= deltaMove.y * 0.5; rotatableObject.setAttribute('rotation', rotation); previousMousePosition = { x: event.clientX, y: event.clientY }; } }); // Atualiza a posição do mouse document.addEventListener('mousemove', function(event) { previousMousePosition = { x: event.clientX, y: event.clientY }; }); </script>
+    <script> 
+        // Variáveis para armazenar o estado de rotação 
+        let isDragging = false; let previousMousePosition = { x: 0, y: 0 };
+        // Função para lidar com o início do arraste 
+        document.addEventListener('mousedown', function(event) { isDragging = true; }); 
+        // Função para lidar com o fim do arraste 
+        document.addEventListener('mouseup', function(event) { isDragging = false; }); 
+        // Função para lidar com o movimento do arraste 
+        document.addEventListener('mousemove', function(event) { if (isDragging) { let deltaMove = { x: event.clientX - previousMousePosition.x, y: event.clientY - previousMousePosition.y }; let rotatableObject = document.getElementById('rotatable-object'); let rotation = rotatableObject.getAttribute('rotation'); rotation.y += deltaMove.x * 0.5; rotation.x -= deltaMove.y * 0.5; rotatableObject.setAttribute('rotation', rotation); previousMousePosition = { x: event.clientX, y: event.clientY }; } }); 
+        // Atualiza a posição do mouse 
+        document.addEventListener('mousemove', function(event) { previousMousePosition = { x: event.clientX, y: event.clientY }; }); </script>
 </body>
 </html>

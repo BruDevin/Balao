@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Realidade Aumentada Simples</title>
+    <title>Realidade Aumentada com Marcador Personalizado</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/jeromeetienne/ar.js/1.7.2/aframe/build/aframe-ar.js"></script>
 </head>
 <body style='margin: 0; overflow: hidden;'>
-    <a-scene embedded arjs='sourceType: webcam; trackingMethod: best; debugUIEnabled: false;'>
-        <a-camera gps-camera rotation-reader></a-camera>
-
-        <a-entity 
-            position="0 1 -2" 
-            rotation="0 0 0" 
-            scale="1 1 1" 
-            gltf-model="url(m1014_tactical_automatic_shotgun.glb)" 
-            animation-mixer>
-        </a-entity>
+    <a-scene embedded arjs='sourceType: webcam;'>
+        <a-marker type='pattern' url='URL_DO_SEU_MARCADOR.patt'>
+            <a-entity
+                position="0 0 0"
+                rotation="0 0 0"
+                scale="0.5 0.5 0.5"
+                gltf-model="https://cdn.aframe.io/link-traversal/models/2.glb"
+                animation-mixer>
+            </a-entity>
+        </a-marker>
+        <a-entity camera></a-entity>
     </a-scene>
 </body>
 </html>
